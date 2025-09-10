@@ -4,22 +4,20 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-// Load environment variables from .env file
 dotenv.config();
 
-// Initialize Express app
 const app = express();
 const port = 3000;
 
 app.use(cors());
-// Initialize Supabase client
+
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.get('/api/random-quote', async (req, res) => {
   try {
-    // Call the 'get_random_quote' database function (RPC)
+
     const { data, error } = await supabase.rpc('get_random_quote');
 
     if (error) {
